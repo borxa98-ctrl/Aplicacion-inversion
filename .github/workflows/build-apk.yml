@@ -9,23 +9,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Unpack Invest AI
-        run: | mkdir -p project unzip -q InvestAI_SOURCE.zip -d project 
-      - name: Java 17
+      - name: Unpack project
+        run: unzip -q InvestAI_SOURCE.zip -d project
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-
-      - name: Android SDK
+      - name: Set up Android
         uses: android-actions/setup-android@v3
-
       - name: Install Android SDK
-        run: | yes | sdkmanager --licenses || true sdkmanager "platforms;android-35" "build-tools;35.0.0" 
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
       - name: Build APK
         working-directory: project
-        run: | chmod +x gradlew ./gradlew assembleDebug 
+        run: chmod +x gradlew && ./gradlew assembleDebug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
