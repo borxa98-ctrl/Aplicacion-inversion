@@ -7,7 +7,7 @@ on:
       - main
     paths:
       - "InvestAI_SOURCE.zip"
-      - ".github/workflows/build-apk.yml"
+      - ".github/workflows/InvestAI_build-apk.yml"
 
 permissions:
   contents: read
